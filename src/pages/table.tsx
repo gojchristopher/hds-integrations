@@ -5,11 +5,15 @@ import { Badge } from "@highoutput/hds-badge";
 import { MenuDropdown } from "@highoutput/hds-dropdown";
 import { Pagination } from "@highoutput/hds-pagination";
 import { Table } from "@highoutput/hds-table";
+import { useToast } from "@highoutput/hds-toast";
 import * as React from "react";
 
 export default function Index() {
   const [data, setData] = React.useState<typeof users>([]);
   const [loading, setLoading] = React.useState(true);
+
+  const toast = useToast();
+
   const [pagination, setPagination] = React.useState({
     page: 1,
     pageSize: 10,
@@ -87,7 +91,13 @@ export default function Index() {
                   menuItems={
                     <>
                       <MenuItem>Edit</MenuItem>
-                      <MenuItem>Delete</MenuItem>
+                      <MenuItem
+                        onClick={() => {
+                          toast.success("Item successfuly deleted.");
+                        }}
+                      >
+                        Delete
+                      </MenuItem>
                     </>
                   }
                 />
